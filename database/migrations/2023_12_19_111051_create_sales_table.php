@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('product_id'); 
             $table->integer('quantity'); 
+            $table->integer('unit_cost'); 
             $table->integer('selling_price'); 
         });
     }

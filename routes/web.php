@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,14 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::redirect('/dashboard', '/sales');
+Route::redirect('/dashboard', '/sales')->name('sales.index');
 
 Route::get('/sales', function () {
-    return view('coffee_sales');
+    $sales_table = DB::table('sales')->pluck( 'product_id', 'quantity', 'unit_cost', 'selling_price' );
+    return view('coffee_sales', [ 'sales_table' => $sales_table ] );
 })->middleware(['auth'])->name('coffee.sales');
+
+Route::get('/sales/add', [ SaleController::class, 'index' ] )->middleware(['auth'])->name('add.sales'); 
 
 Route::get('/shipping-partners', function () {
     return view('shipping_partners');

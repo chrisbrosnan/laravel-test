@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -13,8 +16,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::all(); 
-        return view( 'sales.index', compact( 'sales' ) );
+        return view( 'coffee_sales' )->with( 'sales_table', $this->render_sales_table() );
     }
 
     /**
@@ -88,5 +90,30 @@ class SaleController extends Controller
     public function create()
     {
         return view('sales.create');
+    }
+
+    /**
+     * Render table for sales
+     * 
+     * @return string $table
+     */
+    public function render_sales_table()
+    {
+      $sales_records = DB::table('sales')->pluck( 'product_id', 'quantity', 'unit_cost', 'selling_price' );
+      $table = '<table style="width: 100%; padding: 1em; display: inline-table;">
+                <tr style="background: #e1e1e1;">
+                  <th>Quantity</th>
+                  <th>Unit Cost</th>
+                  <th>Selling Price</th>
+                </tr>';
+      foreach ( $sales_records as $record ) {
+        $table .= '<tr>
+                    <td>'.$record['quantity'].'</td>
+                    <td>'.$record['unit_cost'].'</td>
+                    <td>'.$record['selling_price'].'</td>
+                  </tr>';
+      }
+      $table .= '</table>'; 
+      return $table; 
     }
 }

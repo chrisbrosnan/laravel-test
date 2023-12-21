@@ -43,5 +43,14 @@ class DatabaseSeeder extends Seeder
                 'rate' => 10.00,
             ]
         ); 
+        // Sales Database Seeder Job
+        Sale::factory()->create(
+            [
+                'product_id' => 1,
+                'quantity' => 1,
+                'unit_cost' => 10.00,
+                'selling_price' => 23.33
+            ], 
+        ); 
     }
 }
