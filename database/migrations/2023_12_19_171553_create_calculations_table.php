@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->string('operation'); 
-            $table->integer('rate')
+            $table->integer('rate');
         });
     }
 
