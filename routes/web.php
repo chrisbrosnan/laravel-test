@@ -25,7 +25,7 @@ Route::get('/sales', function () {
     return view('coffee_sales', [ 'sales_table' => $sales_table ] );
 })->middleware(['auth'])->name('coffee.sales');
 
-Route::get('/sales/add', [ SaleController::class, 'index' ] )->middleware(['auth'])->name('add.sales'); 
+Route::get('/sales/add', [ SaleController::class, 'store' ] )->middleware(['auth'])->name('add.sales'); 
 
 Route::get('/shipping-partners', function () {
     return view('shipping_partners');

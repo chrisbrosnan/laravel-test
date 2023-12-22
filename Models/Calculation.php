@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 
-class Sale extends Model
+class Calculation extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,9 +15,8 @@ class Sale extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'product_id',
-        'quantity',
-        'unit_cost',
-        'selling_price'
+        'type',
+        'operation',
+        'rate',
     ];
 }

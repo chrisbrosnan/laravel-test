@@ -20,6 +20,6 @@ class Sale extends Model
         'product_id',
         'quantity',
         'unit_cost',
-        'selling_price'
+        'selling_price',
     ];
 }

@@ -28,27 +28,22 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-          'product_id'    => 'required',
-          'quantity'      => 'required',
-          'unit_cost'     => 'required',
-          'selling_price' => 'required',
-        ]);
-
-        $sale = [
-          'product_id'    => $request->input('product_id'), 
-          'quantity'      => $request->input('quantity'),
-          'unit_cost'     => $request->input('unit_cost'),
-          'selling_price' => $request->input('selling_price'),
-        ];
-        
-        DB::table('sales')->insert(
-          [
-            $sale
-          ],
-        );  
-
-        //DB::insert( 'insert into sales (product_id, quantity, unit_cost, selling_price) values (?, ?, ?, ?)', $sale );
+      print_r( $_GET );
+      $this->validate( $request, 
+        [
+            'product_id'    => 'required',
+            'quantity'      => 'required', 
+            'unit_cost'     => 'required',
+            'selling_price' => 'required',
+        ] 
+      );  
+      $sale = new Sale();
+      //On left field name in DB and on right field name in Form/view/request
+      $sale->product_id    = $request->input('product_id');
+      $sale->quantity      = $request->input('quantity');
+      $sale->unit_cost     = $request->input('unit_cost');
+      $sale->selling_price = $request->input('selling_price');
+      $sale->save();
     }
 
     /**
@@ -115,12 +110,14 @@ class SaleController extends Controller
       $sales_records = DB::table('sales')->pluck( 'product_id', 'quantity', 'unit_cost', 'selling_price' );
       $table = '<table style="width: 100%; padding: 1em; display: inline-table;">
                 <tr style="background: #e1e1e1;">
+                  <th>Product</th>
                   <th>Quantity</th>
                   <th>Unit Cost</th>
                   <th>Selling Price</th>
                 </tr>';
       foreach ( $sales_records as $record ) {
         $table .= '<tr>
+                    <td>'.$record['product_id'].'</td>
                     <td>'.$record['quantity'].'</td>
                     <td>'.$record['unit_cost'].'</td>
                     <td>'.$record['selling_price'].'</td>

@@ -10,7 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @include('components.add-sale')
-                    @php echo $sales_table @endphp
+                    @php 
+                        foreach( $sales_table as $sale )
+                        {
+                            echo $sale;
+                        }
+                    @endphp
                 </div>
             </div>
         </div>
