@@ -3,8 +3,12 @@
         <div class="col-3">
             <p>Product</p>
             <select name="product_id" class="w-100">
-                <option value="1">Arabic Coffee</option>
-                <option value="2">Gold Coffee</option>
+                @php
+                    $products = DB::table('products')->get();
+                    foreach( $products as $product ):
+                        echo '<option value="'.$product->id.'">'.$product->product_name.'</option>';
+                    endforeach;
+                @endphp
             </select>
         </div>
         <div class="col-2">
