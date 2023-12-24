@@ -16,16 +16,18 @@ class ProductSeeder extends Seeder
     {
         $product_array = [
             [
-                'product_name' => 'Arabic Coffee'
+                'product_name' => 'Arabic Coffee', 
+                'profit_margin' => 0.25,
             ],
             [
-                'product_name' => 'Gold Coffee'
+                'product_name' => 'Gold Coffee', 
+                'profit_margin' => 0.15,
             ]
         ];
 
         // Product Database Seeder Job
         foreach ($product_array as $product) {
-            Product::create($product);
+            Product::create( $product );
         }
     }
 }

@@ -20,6 +20,7 @@ class ProductFactory extends Factory
     {
         return [
             'product_name' => $this->faker->title(),
+            'profit_margin' => $this->faker->integer(),
         ];
     }
 }

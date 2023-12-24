@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,24 @@ Route::get('/', function () {
 
 Route::redirect('/dashboard', '/sales')->name('sales.index');
 
+// Sales Routes
+
 Route::get('/sales', function () {
     $sales_table = DB::table('sales')->pluck( 'product_id', 'quantity', 'unit_cost', 'selling_price' );
     return view('coffee_sales', [ 'sales_table' => $sales_table ] );
 })->middleware(['auth'])->name('coffee.sales');
 
-Route::get('/sales/add', [ SaleController::class, 'store' ] )->middleware(['auth'])->name('add.sales'); 
+// Redirect back to index after adding a sale
+Route::get('/sales/add', [ SaleController::class, 'store' ] )->middleware(['auth'])->name('add.sales');
+
+// Get data for specific product for Vue component 
+Route::get('products/{product_id}', function($id){
+    $product = DB::table('products')->where('product_id', $id)->first();
+    return $product;
+}); 
+
+// Route to delete specific sale
+Route::get('/sales/delete/{id}', [ SaleController::class, 'destroy' ] )->middleware(['auth'])->name('delete.sales');
 
 Route::get('/shipping-partners', function () {
     return view('shipping_partners');

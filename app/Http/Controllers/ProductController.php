@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -26,10 +27,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          'product_id' => 'required',
+          'product_name' => 'required',
           'quantity' => 'required',
           'unit_cost' => 'required',
           'selling_price' => 'required',
+          'profit_margin' => 'required',
         ]);
         Product::create($request->all());
         return redirect()->route('products.index')
@@ -39,9 +41,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $product_id)
     {
-        $product = Product::find($id);
+        $product = Product::find($product_id);
         return view( 'products.show', compact( 'products' ) );
     }
 
@@ -55,29 +57,16 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-          'product_id' => 'required',
+          'product_name' => 'required',
           'quantity' => 'required',
           'unit_cost' => 'required',
           'selling_price' => 'required',
+          'profit_margin' => 'required',
         ]);
         $product = Product::find($id);
         $product->update($request->all());
         return redirect()->route('products.index')
           ->with('success', 'Product record updated successfully.');
-    }
- 
-   /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-    public function destroy(string $id)
-    {
-        $product = Product::find($id);
-        $product->delete();
-        return redirect()->route('products.index')
-          ->with('success', 'Product record deleted successfully');
     }
 
     /**

@@ -1,0 +1,31 @@
+<template>
+    <table class="w-100">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Selling Price</th>
+                <th><em>Delete Sale?</em></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr v-for="sale in sales_data">
+            <td>{{ sale.product_name }}</td>
+            <td>{{ sale.sale_quantity }}</td>
+            <td>&pound{{ sale.sale_unit_cost.toFixed(2) }}</td>
+            <td>&pound{{ sale.sale_selling_price.toFixed(2) }}</td>
+            <td><a :href="'/sales/delete/' + sale.id">Delete sale</a></td>
+        </tr>
+        </tbody>
+</table>
+</template>
+
+<script>
+import Vue from 'vue';
+
+export default {
+    name: 'SalesTable', 
+    props: [ 'sales_data' ], 
+}
+</script>

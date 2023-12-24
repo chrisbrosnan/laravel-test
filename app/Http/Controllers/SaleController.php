@@ -47,14 +47,15 @@ class SaleController extends Controller
             $sale
           ],
         );  
-
-        //DB::insert( 'insert into sales (product_id, quantity, unit_cost, selling_price) values (?, ?, ?, ?)', $sale );
+        
+        return redirect()->route('sales.index')
+        ->with('success', 'Sale record updated successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         $sale = Sale::find($id);
         return view( 'sales.show', compact( 'sale' ) );
@@ -67,7 +68,7 @@ class SaleController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $request->validate([
           'product_id' => 'required',
