@@ -18,9 +18,9 @@
                 <td><a :href="'/sales/delete/' + sale.id">Delete sale</a></td>
             </tr>
         </tbody>
-        <tbody v-if="sales_data.length > 0">
+        <tbody v-else>
             <tr>
-                <td colspan="5">
+                <td colspan="5" class="pt-3">
                     <p><em>No sales records present. Add one using the form above.</em></p>
                 </td>
             </tr>
