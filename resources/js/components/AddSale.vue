@@ -17,7 +17,7 @@
             </div>
             <div class="col-2">
                 <p>Selling Price</p>
-                <p>£<span id="selling_price">{{ selling_price }}</span></p>
+                <p class="h4">£<span id="selling_price">{{ selling_price }}</span></p>
                 <input type="hidden" name="selling_price" class="w-100" v-bind:value="selling_price" />
             </div>
             <div class="col-3">
