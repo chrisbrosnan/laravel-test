@@ -19,6 +19,7 @@ sudo n 21
 npm install && npm run dev
 touch database/database.sqlite
 php artisan migrate:fresh --seed
+php artisan db:seed --class=ProductSeeder
 php artisan serve
 ```
 
