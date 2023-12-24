@@ -9,14 +9,21 @@
                 <th><em>Delete Sale?</em></th>
             </tr>
         </thead>
-        <tbody>
-        <tr v-for="sale in sales_data">
-            <td>{{ sale.product_name }}</td>
-            <td>{{ sale.sale_quantity }}</td>
-            <td>&pound{{ sale.sale_unit_cost.toFixed(2) }}</td>
-            <td>&pound{{ sale.sale_selling_price.toFixed(2) }}</td>
-            <td><a :href="'/sales/delete/' + sale.id">Delete sale</a></td>
-        </tr>
+        <tbody v-if="sales_data.length > 0">
+            <tr v-for="sale in sales_data">
+                <td>{{ sale.product_name }}</td>
+                <td>{{ sale.sale_quantity }}</td>
+                <td>&pound{{ sale.sale_unit_cost.toFixed(2) }}</td>
+                <td>&pound{{ sale.sale_selling_price.toFixed(2) }}</td>
+                <td><a :href="'/sales/delete/' + sale.id">Delete sale</a></td>
+            </tr>
+        </tbody>
+        <tbody v-if="sales_data.length > 0">
+            <tr>
+                <td colspan="5">
+                    <p><em>No sales records present. Add one using the form above.</em></p>
+                </td>
+            </tr>
         </tbody>
 </table>
 </template>
